@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oficinas</title>
+</head>
+<body>
+
+<h1>Lista de oficinas</h1>
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tema</th>
+        <th>Instrutor</th>
+        <th>E-mail do instrutor</th>
+        <th>Categoria</th>
+        <th>Carga horária</th>
+        <th>Gratuidade</th>
+        <th>Número de vagas</th>
+        <th>Inscritos</th>
+        <th>Status</th>
+        <th>Ação</th>
+    </tr>
+    <tr>
+        <td th:text="${detalhes.id}"></td>
+        <td th:text="${detalhes.tema}"></td>
+        <td th:text="${detalhes.instrutor}"></td>
+        <td th:text="${detalhes.emailInstrutor}"></td>
+        <td th:text="${detalhes.categoriaOficina}"></td>
+        <td th:text="${detalhes.cargaHoraria}"></td>
+        <td th:text="${detalhes.gratuita}"></td>
+        <td th:text="${detalhes.vagas}"></td>
+        <td th:text="${detalhes.inscritos}"></td>
+        <td th:text="${detalhes.situacaoOficina}"></td>
+        <td>
+            <form th:if="${detalhes.situacaoOficina.name() == 'PUBLICADA' or detalhes.situacaoOficina.name() == 'RASCUNHO'}" th:action="@{/oficinas/{id}/cancelar(id=${detalhes.id})}" method="post" style="display: inline">
+                <button type="submit">Cancelar</button>
+            </form>
+            <br>
+            <form th:if="${detalhes.situacaoOficina.name() == 'RASCUNHO'}" th:action="@{/oficinas/{id}/publicar(id=${detalhes.id})}" method="post" style="display: inline">
+                <button type="submit">Publicar</button>
+            </form>
+            <br>
+            <form th:if="${detalhes.situacaoOficina.name() == 'PUBLICADA'}" th:action="@{/oficinas/{id}/encerrar(id=${detalhes.id})}"  method="post" style="display: inline">
+                <button type="submit">Encerrar</button>
+            </form>
+            <br>
+            <form th:if="${detalhes.situacaoOficina.name() == 'PUBLICADA' and detalhes.possuiVagas()}" th:action="@{/oficinas/{id}/inscrever(id=${detalhes.id})}" method="post" style="display: inline">
+                <button type="submit">Inscrever</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<br><br>
+
+<a th:href="@{/oficinas/novo}">Adicionar nova oficina</a>
+<br>
+<a th:href="@{/oficinas/publicadas}">Oficinas publicadas</a>
+
+</body>
+</html>

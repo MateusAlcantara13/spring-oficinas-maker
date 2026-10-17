@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oficinas</title>
+</head>
+<body>
+
+<h1>Lista de oficinas</h1>
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tema</th>
+        <th>Instrutor</th>
+        <th>E-mail do instrutor</th>
+        <th>Categoria</th>
+        <th>Carga horária</th>
+        <th>Número de vagas</th>
+        <th>Gratuidade</th>
+        <th>Status</th>
+        <th>Inscritos</th>
+        <th>Detalhes</th>
+        <th>Ação</th>
+    </tr>
+    <tr th:each="item : ${oficinas}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.tema}"></td>
+        <td th:text="${item.instrutor}"></td>
+        <td th:text="${item.emailInstrutor}"></td>
+        <td th:text="${item.categoriaOficina}"></td>
+        <td th:text="${item.cargaHoraria}"></td>
+        <td th:text="${item.vagas}"></td>
+        <td th:text="${item.gratuita}"></td>
+        <td th:text="${item.situacaoOficina}"></td>
+        <td th:text="${item.inscritos}"></td>
+        <td><a th:href="@{/oficinas/{id}(id=${item.id})}">Abrir</a></td>
+    </tr>
+</table>
+
+<br><br>
+
+<a th:href="@{/oficinas/novo}">Adicionar nova oficina</a>
+<br>
+<a th:href="@{/oficinas/publicadas}">Oficinas publicadas</a>
+
+</body>
+</html>

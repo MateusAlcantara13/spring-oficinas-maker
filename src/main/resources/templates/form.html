@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário</title>
+</head>
+<body>
+
+<h1>Preencha com as informações</h1>
+
+<form th:action="@{/oficinas}" th:object="${postForm}" method="post">
+    <label>Tema: </label>
+    <input type="text" th:field="*{tema}">
+    <span th:if="${#fields.hasErrors('tema')}" th:errors="*{tema}"></span>
+
+    <label>Instrutor: </label>
+    <input type="text" th:field="*{instrutor}">
+    <span th:if="${#fields.hasErrors('instrutor')}" th:errors="*{instrutor}"></span>
+
+    <label>E-mail do instrutor: </label>
+    <input type="text" th:field="*{emailInstrutor}">
+    <span th:if="${#fields.hasErrors('emailInstrutor')}" th:errors="*{emailInstrutor}"></span>
+
+
+    <label>Categoria: </label>
+    <select th:field="*{categoriaOficina}">
+        <option value="">--Selecione--</option>
+        <option th:each="item : ${categorias}" th:value="${item}" th:text="${item}"></option>
+    </select>
+
+    <label>Carga horária: </label>
+    <input type="number" th:field="*{cargaHoraria}">
+    <span th:if="${#fields.hasErrors('cargaHoraria')}" th:errors="*{cargaHoraria}"></span>
+
+    <label>Quantidade de vagas: </label>
+    <input type="number" th:field="*{vagas}">
+    <span th:if="${#fields.hasErrors('vagas')}" th:errors="*{vagas}" style="color: red"></span>
+
+    <label>Evento pago ou grátis ? </label>
+    <input type="checkbox" th:field="*{gratuita}">
+
+    <button type="submit">Enviar</button>
+
+</form>
+
+<br><br>
+
+<a th:href="@{/oficinas}">Tela inicial</a>
+<br>
+
+</body>
+</html>
